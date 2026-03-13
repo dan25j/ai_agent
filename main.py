@@ -20,6 +20,10 @@ def main():
         role="user",
         parts=[types.Part(text=args.user_prompt)])
     ]
+    generate_content(client, messages, args.verbose)
+
+
+def generate_content(client, messages, verbose):
     response = client.models.generate_content(
         model = "gemini-2.5-flash",
         contents = messages,
@@ -28,8 +32,8 @@ def main():
     if not response.usage_metadata:
        raise RuntimeError("Gemini API response appears to be malformed")
 
-    if args.verbose:
-        print(f"User prompt: {args.user_prompt}")
+    if verbose:
+        print(f"User prompt: {verbose}")
         print(f"Prompt tokens: {response.usage_metadata.prompt_token_count}")
         print(f"Response tokens: {response.usage_metadata.candidates_token_count}")
         print(f"Total tokens: {response.usage_metadata.total_token_count}")
