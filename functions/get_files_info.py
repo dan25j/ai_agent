@@ -1,5 +1,6 @@
 import os
 
+
 def get_files_info(working_directory, directory="."):
     try:
         abs_working_dir = os.path.abspath(working_directory)
@@ -15,5 +16,6 @@ def get_files_info(working_directory, directory="."):
             file_info = f"- {filename}: file_size={os.path.getsize(filepath)} bytes, is_dir={os.path.isdir(filepath)}"
             files_info.append(file_info)
         return "\n".join(files_info)
+    
     except OSError as e:
         return f'Error: {e}'
