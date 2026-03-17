@@ -7,5 +7,6 @@ def test_get_file_content():
         file_content = get_file_content(*test_case)
         print(f"Result for '{test_case[1]}' file:\n {file_content}")
 
+
 if __name__ == "__main__":
     test_get_file_content()
