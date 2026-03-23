@@ -51,11 +51,10 @@ def generate_content(client, messages, verbose, max_steps=MAX_ITERS):
             print(f"Response tokens: {response.usage_metadata.candidates_token_count}")
             print(f"Total tokens: {response.usage_metadata.total_token_count}")
 
-        if response.candidates and response.candidates[0].content:
-            messages.append(response.candidates[0].content)
-        else:
-            print("\n[Error] Gemini returned an empty response (likely due to safety filters).")
-            sys.exit(1)
+        if response.candidates:
+            for candidate in response.candidates:
+                if candidate.content:
+                    messages.append(candidate.content)
 
         
         if response.function_calls:
